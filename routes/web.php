@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -15,24 +16,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return redirect()->route('site.posts');
+});
+
+Route::get('/posts', function () {
+    $posts = Post::all();
+    return view('posts',compact('posts'));
+})->name('site.posts');
+Route::get('posts/{post:slug}', function (Post $post) {
+    return view('post',compact('post'));
+});
+
+Route::get('categories/{category:slug}', function (Category $category) {
     return view('posts',[
-        'posts' => Post::all()
+        'posts' => $category->posts
     ]);
 });
-/*
-Route::get('posts/{post}', function ($slug) {
-    $path = __DIR__."/../resources/posts/{$slug}.html";
-
-    abort_if(! file_exists($path),40
-    $post = cache()->remember("posts.{$slug}", now()->addMinutes(2), function () use ($path) {
-        var_dump('file_get_content');
-        return file_get_contents($path);
-    });
-    return view('post',[
-        'post' =>  $post
-    ]);
-})->where('post','[A-z_\-]+');
-*/
-Route::get('posts/{post}', function ($slug) {
-    return view('post',['post' =>  Post::find($slug)]);
-})->where('post','[A-z_\-]+');

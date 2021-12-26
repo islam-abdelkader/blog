@@ -2,19 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Post
+class Post extends Model
 {
-    public static function find($slug)
-    {
-        abort_if(! file_exists($path = resource_path("posts/{$slug}.html")),404);
-        return cache()->remember("posts.{$slug}", now()->addMinutes(2), fn()=> file_get_contents($path));
-    }
-    public static function all()
-    {
-        $files = File::files(resource_path("posts"));
+    use HasFactory;
 
-        return array_map(fn($file) => $file->getContents() ,$files);
+    protected $guarded = ['id'];    // every thing is fillable except id
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

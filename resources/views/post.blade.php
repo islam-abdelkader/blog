@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Blog</title>
-    <link rel="stylesheet" href="/css/app.css">
-</head>
-
-<body>
-    <?= $post; ?>
-    <a href="/">Go Back</a>
-</body>
-
-</html>
+<x-layout>
+    <article>
+        <h1>
+            {{ $post->title }} {{-- this will no excute html code --}}
+        </h1>
+        <p>
+            <a href="/categories/{{ $post->category->slug }}">
+                {{ $post->category->name }}
+            </a>
+        </p>
+        <div>
+            {!! $post->body !!} {{-- this will excute html code --}}
+        </div>
+    </article>
+    <a href="/posts">Back to Home</a>
+</x-layout>
