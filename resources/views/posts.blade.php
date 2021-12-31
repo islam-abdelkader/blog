@@ -7,6 +7,10 @@
             </a>
         </h1>
         <p>
+            Writen By: <a href="/authors/{{ $post->author->user_name }}">
+                {{ $post->author->name }}
+            </a>
+            in:
             <a href="/categories/{{ $post->category->slug }}">
                 {{ $post->category->name }}
             </a>

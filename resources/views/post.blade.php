@@ -4,8 +4,12 @@
             {{ $post->title }} {{-- this will no excute html code --}}
         </h1>
         <p>
+            Writen By: <a href="/authors/{{ $post->author->user_name }}">
+                {{ $post->user->name }}
+            </a>
+            in:
             <a href="/categories/{{ $post->category->slug }}">
-                {{ $post->category->name }}
+                {{ $post->author->name }}
             </a>
         </p>
         <div>
