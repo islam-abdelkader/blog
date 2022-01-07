@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -17,23 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('site.posts');
-});
+    return redirect()->route('posts');
+})->name('home');
 
-Route::get('/posts', function () {
-    return view('posts', ['posts' => Post::latest()->get()]);
-})->name('site.posts');
-Route::get('posts/{post:slug}', function (Post $post) {
-    return view('post', compact('post'));
-});
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
-Route::get('categories/{category:slug}', function (Category $category) {
-    return view('posts', [
-        'posts' => $category->posts
-    ]);
-});
-Route::get('authors/{author:user_name}', function (User $author) {
-    return view('posts', [
-        'posts' => $author->posts
-    ]);
-});
+Route::get('categories/{category:slug}', [CategoryController::class,'show'])->name('categories.show');
+Route::get('authors/{author:user_name}', [AuthorController::class,'show'])->name('author.show');

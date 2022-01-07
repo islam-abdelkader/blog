@@ -20,8 +20,8 @@ class PostFactory extends Factory
             'user_id' => User::factory(),
             'title' => $this->faker->sentence(6),
             'slug' => $this->faker->slug(),
-            'excerpt' => $this->faker->sentence(15),
-            'body' => $this->faker->paragraph(100),
+            'excerpt' => '<p>' . implode('</p><p>', $this->faker->paragraphs(3)) . '</p>',
+            'body' => '<p>' . implode('</p><p>', $this->faker->paragraphs(8)) . '</p>',
             'bublished_at' => now(),
         ];
     }

@@ -21,8 +21,15 @@ class Post extends Model
     *   use without('author') to ignore author
     *   or without(['category','author']) to ignore category and author
     */
-    protected $with = ['category','author'];
+    protected $with = ['category', 'author'];
 
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, fn ($query, $search) =>
+            $query
+                ->where('title', 'like', '%' . $search . '%')
+                ->orWhere('title', 'like', '%' . $search . '%'));
+    }
     public function category()
     {
         return $this->belongsTo(Category::class);
