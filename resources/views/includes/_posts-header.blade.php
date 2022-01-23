@@ -15,7 +15,7 @@
                 <x-dropdown-item href="{{ route('home') }}" :active="request()->routeIs('posts') ? true : false"> All
                 </x-dropdown-item>
                 @foreach ($categories as $category )
-                <x-dropdown-item href="{{ route('categories.show',$category->slug) }}"
+                <x-dropdown-item href="/?category={{  $category->slug }}"
                     :active="request()->is('categories/'.$category->slug) ? true : false"> {{ ucwords($category->name)
                     }} </x-dropdown-item>
                 @endforeach
