@@ -19,12 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('posts');
-})->name('home');
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 // Route::get('categories/{category:slug}', [CategoryController::class,'show'])->name('categories.show');
-Route::get('authors/{author:user_name}', [AuthorController::class,'show'])->name('author.show');
+// Route::get('authors/{author:user_name}', [AuthorController::class,'show'])->name('author.show');
