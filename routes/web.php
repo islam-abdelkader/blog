@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -23,5 +24,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
+Route::resource('register', RegisterController::class);
 // Route::get('categories/{category:slug}', [CategoryController::class,'show'])->name('categories.show');
 // Route::get('authors/{author:user_name}', [AuthorController::class,'show'])->name('author.show');
