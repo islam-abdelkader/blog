@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -14,7 +13,7 @@ class PostController extends Controller
             Post::latest()
                 ->filter(request(['search', 'category', 'author']))
                 ->paginate(6)
-                ->withQueryString()
+                ->withQueryString(),
         ]);
     }
     public function show(Post $post)

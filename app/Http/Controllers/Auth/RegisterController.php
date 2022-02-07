@@ -21,6 +21,6 @@ class RegisterController extends Controller
         ]);
         User::create($attributes);
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('error','Your Account has been Created.');
     }
 }
