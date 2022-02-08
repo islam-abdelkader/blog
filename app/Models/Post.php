@@ -51,8 +51,8 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    // public function user()   // this mean forgin key is user_id
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
