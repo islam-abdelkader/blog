@@ -17,9 +17,17 @@
                 </a>
             </div>
 
-            <div class="mt-8 md:mt-0">
+            <div class="mt-8 md:mt-0 flex items-center">
+                @auth
+                <form action="{{ route('login.destroy',auth()->user()->id) }}" method="post"  class="text-xs font-semiblold text-blue-500 ml-6">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Logout</button>
+                </form>
+                @else
                 <a href="{{ route('register.create') }}" class="text-xs font-bold uppercase">Register</a>
-                <a href="{{ route('register.create') }}" class="text-xs font-bold uppercase">Login</a>
+                <a href="{{ route('login.create') }}" class="text-xs text-blue-500 font-bold uppercase ml-3">Login</a>
+                @endauth
 
                 <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                     Subscribe for Updates
@@ -54,5 +62,5 @@
             </div>
         </footer>
     </section>
-    <x-alert/>
+    <x-alert />
 </body>
