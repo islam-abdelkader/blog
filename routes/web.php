@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SessionController;
 use App\Models\Post;
@@ -19,7 +20,10 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', [PostController::class, 'index'])->name('home');
-Route::get('posts/{post:slug}', [PostController::class, 'show']);
+// Route::get('posts/{post:slug}', [PostController::class, 'show']);
+
+Route::resource('posts', PostController::class);
 
 Route::resource('register', RegisterController::class);
 Route::resource('login', LoginController::class);
+Route::resource('/posts/{post:id}/comments', PostCommentsController::class);

@@ -16,9 +16,10 @@ class MustBeAdministrator
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()?->username !== 'islam-abdu'){
-            abort(403);
-        }
+        // if(auth()->user()?->username !== 'islam-abdu'){
+        //     abort(403);
+        // }
+        abort_if(auth()->user()?->username !== 'islam-abdu',403);
         return $next($request);
     }
 }

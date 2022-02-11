@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -22,6 +23,34 @@ class Post extends Model
     *   or without(['category','author']) to ignore category and author
     */
     protected $with = ['category', 'author'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+    public static function boot()
+    {
+        parent::boot();
+
+        $closure = function($activity) {
+
+            // produce a slug based on the activity title
+            $slug = Str::slug($activity->title);
+            /**
+             * check to see if any other slugs exist that are the same
+             * & count them
+             */
+            $count = static::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+            /**
+             * if other slugs exist that are the same
+             * append the count to the slug
+             */
+            $activity->slug = $count ? "{$slug}-{$count}" : $slug;
+
+        };
+        static::creating($closure);
+        static::updated($closure);
+    }
 
     public function scopeFilter($query, array $filters)
     {
