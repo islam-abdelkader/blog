@@ -22,6 +22,7 @@ class Post extends Model
     *   use without('author') to ignore author
     *   or without(['category','author']) to ignore category and author
     */
+
     protected $with = ['category', 'author'];
 
     public function getRouteKeyName()

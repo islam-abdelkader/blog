@@ -1,7 +1,10 @@
 <x-layout>
-    <section class="px-6 py-8">
+    <section class="py-8 mx-auto max-w-md">
+
+        <h1 class="mb-4 font-bold text-lg">Publish New Post</h1>
+
         <x-panel>
-            <form action="{{ route('posts.store') }}" method="post">
+            <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-6">
                     <label for="title" class="block mb-2 uppercase font-bold text-xs text-gray-700">title</label>
@@ -11,6 +14,15 @@
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
+
+                <div class="mb-6">
+                    <label for="thumbnail" class="block mb-2 uppercase font-bold text-xs text-gray-700">thumbnail</label>
+                    <input type="file" name="thumbnail" id="thumbnail" class="border border-gray-400 p-2 w-full">
+                    @error('thumbnail')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <div class="mb-6">
                     <label for="excerpt" class="block mb-2 uppercase font-bold text-xs text-gray-700">excerpt</label>
                     <textarea name="excerpt" id="excerpt"
