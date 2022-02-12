@@ -6,39 +6,15 @@
         <x-panel>
             <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="mb-6">
-                    <label for="title" class="block mb-2 uppercase font-bold text-xs text-gray-700">title</label>
-                    <input type="text" name="title" id="title" class="border border-gray-400 p-2 w-full"
-                        value="{{ old('title') }}">
-                    @error('title')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
 
-                <div class="mb-6">
-                    <label for="thumbnail" class="block mb-2 uppercase font-bold text-xs text-gray-700">thumbnail</label>
-                    <input type="file" name="thumbnail" id="thumbnail" class="border border-gray-400 p-2 w-full">
-                    @error('thumbnail')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                <x-form.input name="title" />
 
-                <div class="mb-6">
-                    <label for="excerpt" class="block mb-2 uppercase font-bold text-xs text-gray-700">excerpt</label>
-                    <textarea name="excerpt" id="excerpt"
-                        class="border border-gray-400 p-2 w-full">{{ old('excerpt') }}</textarea>
-                    @error('excerpt')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="mb-6">
-                    <label for="body" class="block mb-2 uppercase font-bold text-xs text-gray-700">Body</label>
-                    <textarea name="body" id="body"
-                        class="border border-gray-400 p-2 w-full">{{ old('body') }}</textarea>
-                    @error('body')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                <x-form.input name="thumbnail" type="file" />
+
+                <x-form.textarea name="excerpt" />
+
+                <x-form.textarea name="body" />
+
                 <div class="mb-6">
                     <label for="category_id"
                         class="block mb-2 uppercase font-bold text-xs text-gray-700">Category</label>
@@ -55,7 +31,7 @@
                     @enderror
                 </div>
                 <div class="mb-6 text-center">
-                    <x-btn-submit>Publish</x-btn-submit>
+                    <x-form.button>Publish</x-form.button>
                 </div>
             </form>
         </x-panel>

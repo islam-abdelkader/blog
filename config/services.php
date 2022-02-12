@@ -19,6 +19,12 @@ return [
         'secret' => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
     ],
+    'mailchimp' => [
+        'key' => env('MAILCHIMP_KEY'),
+        'lists'=>[
+            'subscribers' =>'c5958ae15a'
+        ]
+    ],
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),

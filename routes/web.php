@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NewsLetterController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SessionController;
@@ -24,6 +25,8 @@ Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::resource('posts', PostController::class);
 
+Route::resource('newsletter', NewsLetterController::class);
+
 Route::resource('register', RegisterController::class);
 Route::resource('login', LoginController::class);
-Route::resource('/posts/{post:id}/comments', PostCommentsController::class);
+Route::resource('/posts/{post}/comments', PostCommentsController::class);
