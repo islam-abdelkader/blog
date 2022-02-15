@@ -66,7 +66,7 @@ class User extends Authenticatable
 
         };
         static::creating($closure);
-        static::updated($closure);
+        static::updating($closure);
     }
 
     public function setPasswordAttribute($password)

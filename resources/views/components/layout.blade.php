@@ -19,11 +19,29 @@
 
             <div class="mt-8 md:mt-0 flex items-center">
                 @auth
-                <form action="{{ route('login.destroy',auth()->user()->id) }}" method="post"  class="text-xs font-semiblold text-blue-500 ml-6">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Logout</button>
-                </form>
+                <x-dropdown>
+                    <x-slot name="trigger">
+                        <button class="text-xs font-bold uppercase">
+                            Welcome, {{ auth()->user()->name }}
+                        </button>
+                    </x-slot>
+                    {{-- @can('auth') --}}
+                    <x-dropdown-item href="{{ route('admin.posts.index') }}"  :active="request()->routeIs('admin.posts.index')">
+                        All Posts
+                    </x-dropdown-item>
+                    <x-dropdown-item href="{{ route('admin.posts.create') }}" :active="request()->routeIs('admin.posts.create')">
+                        New Post
+                    </x-dropdown-item>
+                    {{-- @endcan --}}
+                    <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">
+                        Log out
+                    </x-dropdown-item>
+                    <form id="logout-form" action="{{ route('login.destroy',auth()->user()->id) }}" method="post"
+                        class="hidden">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                </x-dropdown>
                 @else
                 <a href="{{ route('register.create') }}" class="text-xs font-bold uppercase">Register</a>
                 <a href="{{ route('login.create') }}" class="text-xs text-blue-500 font-bold uppercase ml-3">Login</a>
@@ -46,14 +64,15 @@
                     <form method="POST" action="{{ route('newsletter.store') }}" class="lg:flex text-sm">
                         @csrf
                         <div class="lg:py-3 lg:px-5 flex items-center">
-                            {{-- <x-form.input name="email" type="email"/> --}}
+                            {{--
+                            <x-form.input name="email" type="email" /> --}}
                             <label for="email" class="hidden lg:inline-block">
                                 <img src="/images/mailbox-icon.svg" alt="mailbox letter">
                             </label>
 
                             <input id="email" name="email" type="text" placeholder="Your email address"
                                 class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
-                                <x-form.error name="email"/>
+                            <x-form.error name="email" />
                         </div>
                         <x-form.button>Subscribe</x-form.button>
                     </form>
