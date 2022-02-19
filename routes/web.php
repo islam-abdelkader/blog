@@ -26,7 +26,7 @@ Route::resource('register', RegisterController::class);
 Route::resource('login', LoginController::class);
 Route::resource('/posts/{post}/comments', PostCommentsController::class);
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware('can:admin')->group(function () {
     Route::resource('admin/posts', AdminPostController::class, ['as'=> 'admin']);
 });
 Route::resource('newsletter', NewsLetterController::class);

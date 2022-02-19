@@ -25,7 +25,8 @@
                             Welcome, {{ auth()->user()->name }}
                         </button>
                     </x-slot>
-                    {{-- @can('auth') --}}
+                    {{-- @can('admin') --}}
+                    {{-- @admin --}}
                     <x-dropdown-item href="{{ route('admin.posts.index') }}"  :active="request()->routeIs('admin.posts.index')">
                         All Posts
                     </x-dropdown-item>
@@ -33,6 +34,7 @@
                         New Post
                     </x-dropdown-item>
                     {{-- @endcan --}}
+                    {{-- @endadmin --}}
                     <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">
                         Log out
                     </x-dropdown-item>
